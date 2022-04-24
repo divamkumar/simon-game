@@ -7,6 +7,13 @@ function playSound(color) {
     audio.play();
 }
 
+function animatePress(color) {
+    $('#'+color).addClass('pressed');
+    setTimeout(function() {
+        $('#'+color).removeClass('pressed');
+    }, 100);
+}
+
 function nextSequence() {
     var randomNum = Math.floor(Math.random() * 4);
     var chosenColor = buttonColors[randomNum];
@@ -18,6 +25,7 @@ function nextSequence() {
         userClickedPattern.push(userColor);
         console.log(userClickedPattern);
         playSound(userColor);
+        animatePress(userColor);
     });
 }
 
