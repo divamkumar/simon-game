@@ -1,30 +1,20 @@
-buttonColors = ['red', 'blue', 'green', 'yellow'];
-gameSequence = [];
+var buttonColors = ['red', 'blue', 'green', 'yellow'];
+var AIClickedPattern = [];
+var userClickedPattern = [];
 
 function nextSequence() {
     var randomNum = Math.floor(Math.random() * 4);
-    return randomNum;
+    var chosenColor = buttonColors[randomNum];
+    AIClickedPattern.push(chosenColor);
+    $('#'+chosenColor).fadeOut(100).fadeIn(100);
+    var audio = new Audio('sounds/'+chosenColor+'.mp3');
+    audio.play();
+
+    $('.btn').click(function() {
+        userClickedPattern.push(this.getAttribute('id'));
+        console.log(userClickedPattern);
+    });
 }
 
-var chosenColor = buttonColors[nextSequence()]; 
-
-function simonChooses(color) {
-    switch (color) {
-        case 'red':
-            $("#red").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-        case 'blue':
-            $("#blue").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-        
-        case 'green':
-            $("#green").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-        case 'yellow':
-            $("#yellow").fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-        default:
-            console.log(color);
-            break;
-    }
-}
+nextSequence();
+// console.log(userClickedPattern);
